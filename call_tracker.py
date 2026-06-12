@@ -51,13 +51,13 @@ def read_call_log():
 
 def create_call_record(member_id, call_type, call_minutes, resolved, call_notes, generated_summary):
 
-            call_record = {
-            "member_id": member_id,
-            "call_type": call_type,
-            "call_minutes": call_minutes,
-            "resolved": resolved,
-            "call_notes": call_notes,
-            "generated_summary": generated_summary
+    call_record = {
+        "member_id": member_id,
+        "call_type": call_type,
+        "call_minutes": call_minutes,
+        "resolved": resolved,
+        "call_notes": call_notes,
+        "generated_summary": generated_summary
     }
 
     return call_record
