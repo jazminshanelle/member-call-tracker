@@ -49,6 +49,19 @@ def read_call_log():
     except FileNotFoundError:
         print("No call history found yet.")
 
+        def create_call_record(member_id, call_type, call_minutes, resolved, call_notes, generated_summary):
+
+            call_record = {
+            "member_id": member_id,
+            "call_type": call_type,
+            "call_minutes": call_minutes,
+            "resolved": resolved,
+            "call_notes": call_notes,
+            "generated_summary": generated_summary
+    }
+
+    return call_record
+
 while True:
 
     print("\n=== MENU ===")
@@ -63,6 +76,16 @@ while True:
         member_id, call_type, call_minutes, resolved, call_notes = get_call_data()
 
         generated_summary = generate_summary(call_type, call_notes, resolved)
+
+        call_record = create_call_record(
+        member_id,
+        call_type,
+        call_minutes,
+        resolved,
+        call_notes,
+     generated_summary
+)
+        python(call_record)
 
         print_summary(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
 
