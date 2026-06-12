@@ -1,3 +1,4 @@
+import json
 print("=== Member Call Tracker ===")
 
 
@@ -29,23 +30,28 @@ def print_summary(member_id, call_type, call_minutes, resolved, call_notes, gene
     print("Generated Summary:", generated_summary)
 
 
-def save_to_file(member_id, call_type, call_minutes, resolved, call_notes, generated_summary):
-    with open("call_log.txt", "a") as file:
-        file.write("\n--- NEW CALL ---\n")
-        file.write(f"Member ID: {member_id}\n")
-        file.write(f"Call Type: {call_type}\n")
-        file.write(f"Duration: {call_minutes}\n")
-        file.write(f"Resolved: {resolved}\n")
-        file.write(f"Notes: {call_notes}\n")
-        file.write(f"Summary: {generated_summary}\n")
+def save_to_file(call_record):
+
+    try:
+        with open("call_log.json", "r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        data = []
+
+    data.append(call_record)
+
+    with open("call_log.json", "w") as file:
+        json.dump(data, file, indent=4)
+
 
 def read_call_log():
     print("\n=== PAST CALLS ===")
 
     try:
-        with open("call_log.txt", "r") as file:
-            content = file.read()
-            print(content)
+        with open("call_log.json", "r") as file:
+            data = json.load(file)
+            for record in data:
+                print(f"Member: {record['member_id']}, Type: {record['call_type']}, Resolved: {record['resolved']}")
     except FileNotFoundError:
         print("No call history found yet.")
 
@@ -89,7 +95,7 @@ while True:
 
         print_summary(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
 
-        save_to_file(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
+        save_to_file(call_record)
 
     elif choice == "2":
         read_call_log()
