@@ -27,5 +27,3 @@ with open("call_log.txt", "a") as file:
     file.write(f"Resolved: {resolved}\n")
     file.write(f"Notes: {call_notes}\n")
     file.write(f"Summary: {generated_summary}\n")
-
-Updated call tracker with generated summary formatting
