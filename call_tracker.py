@@ -19,4 +19,13 @@ print("Resolved:", resolved)
 print("Call Notes:", call_notes)
 print("Generated Summary:", generated_summary)
 
+with open("call_log.txt", "a") as file:
+    file.write("\n--- NEW CALL ---\n")
+    file.write(f"Member ID: {member_id}\n")
+    file.write(f"Call Type: {call_type}\n")
+    file.write(f"Duration: {call_minutes}\n")
+    file.write(f"Resolved: {resolved}\n")
+    file.write(f"Notes: {call_notes}\n")
+    file.write(f"Summary: {generated_summary}\n")
+
 Updated call tracker with generated summary formatting
