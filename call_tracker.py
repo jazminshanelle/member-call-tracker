@@ -83,7 +83,7 @@ while True:
         call_minutes,
         resolved,
         call_notes,
-     generated_summary
+        generated_summary
 )
         print(call_record)
 
