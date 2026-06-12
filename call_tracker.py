@@ -39,21 +39,41 @@ def save_to_file(member_id, call_type, call_minutes, resolved, call_notes, gener
         file.write(f"Notes: {call_notes}\n")
         file.write(f"Summary: {generated_summary}\n")
 
+def read_call_log():
+    print("\n=== PAST CALLS ===")
+
+    try:
+        with open("call_log.txt", "r") as file:
+            content = file.read()
+            print(content)
+    except FileNotFoundError:
+        print("No call history found yet.")
 
 while True:
 
-    member_id, call_type, call_minutes, resolved, call_notes = get_call_data()
+    print("\n=== MENU ===")
+    print("1. Add new call")
+    print("2. View past calls")
+    print("3. Exit")
 
-    generated_summary = generate_summary(call_type, call_notes, resolved)
+    choice = input("Choose an option: ")
 
-    print_summary(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
+    if choice == "1":
 
-    save_to_file(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
+        member_id, call_type, call_minutes, resolved, call_notes = get_call_data()
 
-    again = input("\nDo you want to enter another call? (yes/no): ")
+        generated_summary = generate_summary(call_type, call_notes, resolved)
 
-    if again.lower() != "yes":
+        print_summary(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
+
+        save_to_file(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
+
+    elif choice == "2":
+        read_call_log()
+
+    elif choice == "3":
         print("Exiting Member Call Tracker. Goodbye!")
         break
-        print("Exiting Member Call Tracker. Goodbye!")
-        break
+
+    else:
+        print("Invalid option. Try again.")
