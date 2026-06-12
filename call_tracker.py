@@ -49,7 +49,7 @@ def read_call_log():
     except FileNotFoundError:
         print("No call history found yet.")
 
-        def create_call_record(member_id, call_type, call_minutes, resolved, call_notes, generated_summary):
+def create_call_record(member_id, call_type, call_minutes, resolved, call_notes, generated_summary):
 
             call_record = {
             "member_id": member_id,
@@ -85,7 +85,7 @@ while True:
         call_notes,
      generated_summary
 )
-        python(call_record)
+        print(call_record)
 
         print_summary(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
 
