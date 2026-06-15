@@ -111,6 +111,22 @@ def view_analytics():
     print(f"Average Call Duration: {avg_duration:.2f} minutes")
     print(f"Most Common Call Type: {most_common_type}")
 
+def ai_enhanced_summary(record):
+    return f"""
+AI ANALYSIS:
+
+Issue Type: {record['call_type']}
+Call Length: {record['call_minutes']} minutes
+
+Summary:
+Member contacted support regarding {record['call_type']}.
+
+AI Tag: {record['call_type'].upper()}_ISSUE
+
+Priority: {'HIGH' if record['resolved'].lower() == 'no' else 'NORMAL'}
+"""
+    
+
 while True:
 
     print("\n=== MENU ===")
@@ -135,6 +151,10 @@ while True:
             call_notes,
             generated_summary
         )
+        ai_summary = ai_enhanced_summary(call_record)
+
+        print("\n=== AI ANALYSIS ===")
+        print(ai_summary)
 
         print(call_record)
         print_summary(member_id, call_type, call_minutes, resolved, call_notes, generated_summary)
